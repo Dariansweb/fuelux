@@ -405,6 +405,9 @@ module.exports = function(grunt) {
 	// multiple jquery versions, then run SauceLabs VMs
 	grunt.registerTask('releasetest', 'run jshint, qunit:full, and saucelabs', ['connect:testServer', 'jshint', 'qunit:full', 'saucelabs']);
 
+	// multiple jquery versions
+	grunt.registerTask('releasetest', 'run jshint, qunit:full, and saucelabs', ['connect:testServer', 'jshint', 'qunit:full']);
+
 	// can be run locally instead of through TravisCI, but requires the Fuel UX Saucelabs API key file which is not public at this time.
 	grunt.registerTask('saucelabs', 'run jshint, and qunit on saucelabs', ['connect:testServer', 'jshint', 'saucelabs-qunit:defaultBrowsers']);
 
@@ -421,7 +424,11 @@ module.exports = function(grunt) {
 	// Maintainers: Run prior to a release. Includes SauceLabs VM tests.
 	// --minor will create a semver minor release, otherwise a patch release will be created
 	grunt.registerTask('release', 'Release a new version, push it and publish it', function() {
-		if (! grunt.option('no-tests') ) { grunt.task.run(['releasetest']); }
+		if ( !grunt.option('no-tests') && !grunt.option('no-sauce') ) {
+			grunt.task.run(['releasetest']);
+		}else if ( !grunt.option('no-tests') ) {
+			grunt.task.run(['releasetest']);
+		}
 		grunt.config('banner', '<%= bannerRelease %>');
 		grunt.task.run(['bump-only:' + versionReleaseType, 'dist', 'replace:readme']);
 	});
