@@ -1,6 +1,6 @@
 /*!
- * Fuel UX EDGE - Built 2015/02/10, 3:42:38 PM
- * Previous release: v3.5.1
+ * Fuel UX EDGE - Built 2015/02/11, 10:46:48 AM
+ * Previous release: v3.6.1
  * Copyright 2012-2015 ExactTarget
  * Licensed under the BSD-3-Clause license (https://github.com/ExactTarget/fuelux/blob/master/LICENSE)
  */
@@ -2297,7 +2297,7 @@
 	( function( $ ) {
 
 		/*
-		 * Fuel UX Button Dropdown
+		 * Fuel UX Selectlist
 		 * https://github.com/ExactTarget/fuelux
 		 *
 		 * Copyright (c) 2014 ExactTarget
@@ -5811,7 +5811,7 @@
 				this.viewOptions.list_rowRendered( {
 					container: $tbody,
 					item: $row,
-					rowData: data
+					rowData: data.items[ index ]
 				}, function() {} );
 			}
 		}
